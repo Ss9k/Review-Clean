@@ -6,7 +6,10 @@ import pandas as pd
 import requests
 import streamlit as st
 
-API_URL = os.getenv("REVIEWCLEAN_API_URL", "http://127.0.0.1:8000").rstrip("/")
+API_URL = os.getenv(
+    "REVIEWCLEAN_API_URL",
+    "https://review-clean.onrender.com"
+).rstrip("/")
 
 st.set_page_config(page_title="ReviewClean | Data Quality Studio", page_icon="🧹", layout="wide")
 st.markdown("""
