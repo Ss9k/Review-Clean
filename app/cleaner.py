@@ -69,6 +69,12 @@ def clean_reviews(df: pd.DataFrame, *, trim_whitespace: bool = True, drop_duplic
     empty_rows_removed = int(empty_mask.sum())
     result = result.loc[~empty_mask].copy()
 
+    # Replace missing cells in remaining rows with the literal string "None".
+    result = result.fillna("None")
+
+    # Treat empty strings and whitespace-only cells as missing values.
+    result = result.replace(r"^\s*$", "None", regex=True)
+
     duplicate_rows_removed = 0
     if drop_duplicates:
         before = len(result)
