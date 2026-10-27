@@ -81,3 +81,28 @@ def test_retry_reraises_after_final_attempt(monkeypatch):
 def test_retry_rejects_invalid_attempt_count():
     with pytest.raises(ValueError, match="at least 1"):
         retry(max_attempts=0)
+
+
+def test_replaces_missing_cells_and_removes_fully_empty_rows():
+    df = pd.DataFrame({
+        "review": ["Great", None, None],
+        "rating": [5, None, 3],
+        "city": [None, None, "Jaipur"],
+    })
+
+    cleaned, stats = clean_reviews(df)
+
+    assert len(cleaned) == 2
+    assert cleaned.iloc[0].to_dict() == {
+        "review": "Great",
+        "rating": 5.0,
+        "city": "None",
+    }
+    assert cleaned.iloc[1].to_dict() == {
+        "review": "None",
+        "rating": 3.0,
+        "city": "Jaipur",
+    }
+    assert stats["empty_rows_removed"] == 1
+    
+    
