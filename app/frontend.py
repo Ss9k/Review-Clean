@@ -18,7 +18,8 @@ st.markdown("""
 [data-testid="stAppViewContainer"] {background: linear-gradient(135deg,#0b1020 0%,#111827 55%,#151525 100%);}
 [data-testid="stMetric"] {background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09); padding: 16px; border-radius: 14px;}
 section[data-testid="stSidebar"] {background: #0b1020;}
-[data-testid="stFileUploader"] small {
+[data-testid="stFileUploader"] small,
+[data-testid="stFileUploaderDropzoneInstructions"] {
     display: none;
 }
 </style>
