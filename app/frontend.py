@@ -18,6 +18,9 @@ st.markdown("""
 [data-testid="stAppViewContainer"] {background: linear-gradient(135deg,#0b1020 0%,#111827 55%,#151525 100%);}
 [data-testid="stMetric"] {background: rgba(255,255,255,.045); border: 1px solid rgba(255,255,255,.09); padding: 16px; border-radius: 14px;}
 section[data-testid="stSidebar"] {background: #0b1020;}
+[data-testid="stFileUploader"] small {
+    display: none;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -32,6 +35,7 @@ with st.sidebar:
     # st.caption(f"Backend: `{API_URL}`")
 
 uploaded = st.file_uploader("Upload a customer reviews CSV", type=["csv"], help="Maximum file size: 10 MB")
+st.caption("Maximum 10 MB per file • CSV")
 if uploaded:
     raw = uploaded.getvalue()
     st.write(f"**File:** {uploaded.name} · **Size:** {len(raw):,} bytes")
